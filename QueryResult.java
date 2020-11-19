@@ -16,7 +16,7 @@
  * Erweitert um toString-Funktion
  * </p>
  * @author Qualitaets- und UnterstuetzungsAgentur - Landesinstitut fuer Schule
- * @author Magnus Müller 
+ * @author Magnus MÃ¼ller 
  * @version 2015-01-31
  */
 public class QueryResult{
@@ -78,24 +78,31 @@ public class QueryResult{
       return 0;
   }
   /**
-   * Gibt die Anfrage als Formatierten String in Tabellenform zurück
+   * Gibt die Anfrage als Formatierten String in Tabellenform zurueck
    */
   public String toString() {
+	  return toString(8);
+  }
+  /**
+   * Gibt die Anfrage als Formatierten String in Tabellenform zurueck
+   * @param tabWidth die Maximale Breite einer Spalte
+   */
+  public String toString(int tabWidth) {
 	  String returnString = "";
 	  for (String name: columnNames) {
-		  returnString += name + "\t";
+		  returnString += reduce(name,tabWidth)  + "\t";
 	  }
 	  returnString += "\n";
 	  
 	  for (String type: columnTypes) {
-		  returnString += type + "\t";
+		  returnString +=  reduce(type,tabWidth) + "\t";
 	  }
 	  returnString += "\n";
 	  returnString += "\n";
 	  
 	  for (String date2[]: data) {
 		  for (String date1: date2) {
-			  returnString += date1 + "\t";
+			  returnString +=  reduce(date1,tabWidth) + "\t";
 		  }
 		  returnString += "\n";
 	  }
@@ -126,6 +133,10 @@ public class QueryResult{
 	  //System.out.println(returnString);
 	  
 	  return returnString;
+  }
+  
+  private String reduce(String string, int length){
+	  return string.length() >= length?string.substring(0,length-1):string;
   }
 
 }
